@@ -6,9 +6,21 @@ export default (props) => {
     const list = props.list || [];
     return list.map((todo) => (
       <tr key={todo._id}>
-        <td className={todo.done ? 'markedAsDone' : ''}>{todo.description}</td>
+        <td className={todo.done ? "markedAsDone" : ""}>{todo.description}</td>
         <td>
-        <IconButton
+          {new Date(todo.createdAt).toLocaleDateString("pt-PT", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </td>
+        <td>
+          {new Date(todo.updateAt).toLocaleDateString("pt-PT", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </td>
+        <td>
+          <IconButton
             style="success"
             icon="check"
             hide={todo.done}
@@ -35,7 +47,9 @@ export default (props) => {
       <thead>
         <tr>
           <th>Descrição </th>
-          <th>Ações</th>
+          <th>Data de Criação</th>
+          <th>Atualizado</th>
+          <th className="tableActions">Ações</th>
         </tr>
       </thead>
       <tbody>{renderRows()}</tbody>
